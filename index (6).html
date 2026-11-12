@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Сумая & Али — Свадебное приглашение</title>
+<meta property="og:title" content="Сумая & Али — приглашение на свадьбу">
+<meta property="og:description" content="06.12.2026 · 18:00 · «Яккасарой»">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Marck+Script&display=swap" rel="stylesheet">
+<style>
+/* ================= ПЕРЕМЕННЫЕ ================= */
+:root{
+  --cream:#f6ecd9;
+  --beige:#e9d6b6;
+  --sand:#d9bf96;
+  --gold:#b98a3e;
+  --gold-light:#e8c77a;
+  --wine:#6e1420;
+  --wine-dark:#4a0d16;
+  --olive:#8a8f62;
+  --ink:#4a2a22;
+  --font-script:'Marck Script','Segoe Script',cursive;
+  --font-serif:'Cormorant Garamond',Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-serif);color:var(--ink);background:var(--cream);
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+body.locked{overflow:hidden;height:100svh}
+button{font-family:inherit;cursor:pointer;border:none}
+
+/* ================= ЭКРАН 1: КОНВЕРТ ================= */
+#envelope{
+  position:fixed;inset:0;z-index:100;overflow:hidden;cursor:pointer;
+  background:linear-gradient(180deg,#efe0c4,#dcc49d);
+  transition:opacity .8s ease .9s,visibility 0s 1.7s;
+}
+#envelope.open{opacity:0;visibility:hidden;pointer-events:none}
+.flap{
+  position:absolute;
+  background:
+    radial-gradient(circle at 30% 20%,rgba(255,255,255,.35),transparent 55%),
+    linear-gradient(160deg,#ead9ba,#d3b88d);
+  transition:transform 1.5s cubic-bezier(.65,0,.25,1),opacity 1.2s ease .5s;
+}
+.flap svg{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+.f-top{left:0;top:0;width:100%;height:55%;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;z-index:3;
+  background:linear-gradient(180deg,#f4e8d0,#e0c9a2)}
+.f-bot{left:0;bottom:0;width:100%;height:55%;clip-path:polygon(50% 0,100% 100%,0 100%);transform-origin:bottom;z-index:2}
+.f-left{left:0;top:0;width:55%;height:100%;clip-path:polygon(0 0,100% 50%,0 100%);transform-origin:left;z-index:1;
+  background:linear-gradient(90deg,#dcc29a,#cfb185)}
+.f-right{right:0;top:0;width:55%;height:100%;clip-path:polygon(100% 0,0 50%,100% 100%);transform-origin:right;z-index:1;
+  background:linear-gradient(270deg,#dcc29a,#cfb185)}
+.glow{
+  position:absolute;inset:0;z-index:4;pointer-events:none;
+  background:
+   linear-gradient(to bottom right,transparent 47.6%,rgba(255,196,110,.9) 49.5%,transparent 52%),
+   linear-gradient(to bottom left,transparent 47.6%,rgba(255,196,110,.9) 49.5%,transparent 52%);
+  filter:blur(6px);animation:pulseGlow 3.2s ease-in-out infinite;
+}
+@keyframes pulseGlow{50%{opacity:.55}}
+#envelope.open .f-top{transform:translateY(-105%) rotateX(70deg);opacity:0}
+#envelope.open .f-bot{transform:translateY(105%) rotateX(-70deg);opacity:0}
+#envelope.open .f-left{transform:translateX(-105%);opacity:0}
+#envelope.open #glow{opacity:0}
+#envelope.open .f-right{transform:translateX(105%);opacity:0}
+#seal{
+  position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;z-index:6;
+  filter:drop-shadow(0 8px 14px rgba(40,5,10,.55));
+  animation:sealFloat 3s ease-in-out infinite;
+  transition:transform .7s ease,opacity .6s ease .2s;
+}
+@keyframes sealFloat{50%{transform:scale(1.05)}}
+#envelope.open #seal{animation:none;transform:scale(1.6) rotate(18deg);opacity:0}
+#seal .half{transition:transform .7s ease}
+#envelope.open #seal .h1{transform:translate(-14px,-6px) rotate(-12deg)}
+#envelope.open #seal .h2{transform:translate(14px,6px) rotate(12deg)}
+#tapHint{
+  position:absolute;left:0;right:0;top:calc(50% + 105px);text-align:center;z-index:6;
+  font-style:italic;font-size:19px;letter-spacing:.06em;color:var(--wine);
+  animation:blink 2.2s ease-in-out infinite;transition:opacity .4s;
+}
+#envelope.open #tapHint{opacity:0}
+@keyframes blink{50%{opacity:.35}}
+
+/* ================= ЭКРАН 2: ГЛАВНЫЙ ================= */
+#hero{position:relative;height:100svh;min-height:620px;overflow:hidden;background:var(--beige)}
+#heroBg{position:absolute;inset:0;width:100%;height:100%}
+#particles{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+.hero-text{
+  position:absolute;left:0;right:0;top:19%;text-align:center;z-index:4;padding:0 8%;
+}
+.hero-text .sub{font-family:var(--font-script);font-size:clamp(26px,8vw,40px);color:var(--gold);letter-spacing:.04em}
+.hero-text .date{margin-top:14px;font-size:clamp(22px,6.5vw,30px);letter-spacing:.22em;color:var(--ink);font-weight:600}
+.hero-text .names{margin-top:26px;font-family:var(--font-script);color:var(--wine);line-height:1.15;
+  font-size:clamp(54px,17vw,92px);text-shadow:0 2px 0 rgba(255,255,255,.4)}
+.hero-text .amp{display:block;font-size:.6em;color:var(--gold)}
+.reveal-line{opacity:0;transform:translateY(22px);transition:opacity 1.4s ease,transform 1.4s ease}
+body.opened .reveal-line{opacity:1;transform:none}
+body.opened .reveal-line:nth-child(1){transition-delay:1.2s}
+body.opened .reveal-line:nth-child(2){transition-delay:1.9s}
+body.opened .reveal-line:nth-child(3){transition-delay:2.6s}
+#scrollHint{
+  position:absolute;left:0;right:0;bottom:15%;text-align:center;z-index:4;
+  font-size:13px;letter-spacing:.4em;color:var(--wine);font-weight:600;opacity:0;transition:opacity 1.5s ease 3.4s;
+}
+body.opened #scrollHint{opacity:1}
+#scrollHint i{display:block;margin:8px auto 0;width:12px;height:12px;border-right:2px solid var(--wine);border-bottom:2px solid var(--wine);
+  transform:rotate(45deg);animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:rotate(45deg) translate(5px,5px)}}
+#musicBtn{
+  position:fixed;right:16px;bottom:18px;z-index:50;width:50px;height:50px;border-radius:50%;
+  background:var(--wine);box-shadow:0 6px 16px rgba(60,5,15,.4);display:none;align-items:center;justify-content:center;
+}
+body.opened #musicBtn{display:flex}
+#musicBtn .bars{display:flex;gap:3px;align-items:flex-end;height:18px}
+#musicBtn .bars b{width:3.5px;background:#f6ecd9;border-radius:2px;height:100%;transform-origin:bottom;animation:eq 1s ease-in-out infinite}
+#musicBtn .bars b:nth-child(2){animation-delay:.25s}
+#musicBtn .bars b:nth-child(3){animation-delay:.5s}
+#musicBtn .bars b:nth-child(4){animation-delay:.15s}
+#musicBtn.off .bars b{animation:none;transform:scaleY(.25)}
+@keyframes eq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.sway{transform-origin:50% 100%;animation:sway 6s ease-in-out infinite}
+.sway.b{animation-delay:-2s;animation-duration:7s}
+@keyframes sway{50%{transform:rotate(2.2deg)}}
+.swan-l,.swan-r{animation:swanBob 5s ease-in-out infinite}
+.swan-r{animation-delay:-2.5s}
+@keyframes swanBob{50%{transform:translateY(-3px)}}
+
+/* ================= СЕКЦИИ ================= */
+section.page{
+  position:relative;padding:76px 26px;text-align:center;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(185,138,62,.12),transparent 40%),
+    linear-gradient(180deg,var(--cream),#f1e3c8);
+}
+section.page:nth-of-type(even){background:linear-gradient(180deg,#f1e3c8,var(--cream))}
+.ornament{display:block;margin:0 auto 18px;width:120px;height:16px}
+h2{font-family:var(--font-script);font-weight:400;color:var(--wine);font-size:clamp(34px,10vw,50px);margin-bottom:22px}
+p.lead{font-size:clamp(20px,5.4vw,24px);line-height:1.6;max-width:520px;margin:0 auto}
+.fade{opacity:0;transform:translateY(34px);transition:opacity 1s ease,transform 1s ease}
+.fade.in{opacity:1;transform:none}
+.card{
+  max-width:440px;margin:0 auto;padding:30px 22px;border-radius:200px 200px 22px 22px;
+  background:rgba(255,250,238,.75);border:1.5px solid var(--gold);
+  box-shadow:0 0 0 6px rgba(255,250,238,.6),0 0 0 7px rgba(185,138,62,.4),0 14px 30px rgba(110,20,32,.12);
+}
+.detail{margin:14px 0}
+.detail small{display:block;font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.detail strong{font-size:clamp(26px,7vw,32px);font-weight:600;color:var(--wine)}
+.btn{
+  display:inline-block;margin-top:20px;padding:14px 30px;border-radius:40px;text-decoration:none;
+  background:linear-gradient(135deg,var(--wine),var(--wine-dark));color:var(--cream);font-size:19px;letter-spacing:.06em;
+  box-shadow:0 8px 18px rgba(80,10,20,.35);transition:transform .2s;font-family:var(--font-serif);font-weight:600;
+}
+.btn:active{transform:scale(.96)}
+.btn.ghost{background:transparent;color:var(--wine);border:1.5px solid var(--wine);box-shadow:none}
+.map-wrap{max-width:460px;margin:26px auto 0;border-radius:20px;overflow:hidden;border:1.5px solid var(--gold);
+  box-shadow:0 10px 24px rgba(0,0,0,.15)}
+.map-wrap iframe{display:block;width:100%;height:300px;border:0}
+#countdown{display:flex;justify-content:center;gap:10px;max-width:460px;margin:0 auto}
+#countdown div{flex:1;padding:16px 4px;border-radius:16px;background:var(--wine);color:var(--cream);
+  box-shadow:0 8px 16px rgba(80,10,20,.25)}
+#countdown b{display:block;font-size:clamp(28px,9vw,38px);font-weight:600;font-variant-numeric:tabular-nums}
+#countdown span{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light)}
+.rsvp-btns{display:flex;flex-direction:column;gap:12px;align-items:center}
+footer{padding:56px 20px 70px;text-align:center;background:linear-gradient(180deg,#f1e3c8,var(--beige))}
+footer .sign{font-family:var(--font-script);font-size:clamp(32px,9vw,46px);color:var(--wine)}
+footer .brand{margin-top:26px;font-size:13px;letter-spacing:.45em;color:var(--gold)}
+.petal{position:fixed;top:-30px;z-index:40;pointer-events:none;width:12px;height:16px;border-radius:70% 0 70% 0;
+  background:linear-gradient(135deg,#f3c9c4,#e39a9a);opacity:.8;animation:fall linear forwards}
+@keyframes fall{to{transform:translate(var(--dx),110vh) rotate(540deg);opacity:.2}}
+</style>
+</head>
+<body class="locked">
+
+<!-- ============ КОНВЕРТ ============ -->
+<div id="envelope" role="button" aria-label="Открыть приглашение">
+  <div class="flap f-left"><svg id="pat1" viewBox="0 0 100 100" preserveAspectRatio="none"></svg></div>
+  <div class="flap f-right"><svg id="pat2" viewBox="0 0 100 100" preserveAspectRatio="none"></svg></div>
+  <div class="flap f-bot"><svg id="pat3" viewBox="0 0 100 100" preserveAspectRatio="none"></svg></div>
+  <div class="flap f-top"><svg id="pat4" viewBox="0 0 100 100" preserveAspectRatio="none"></svg></div>
+  <div class="glow" id="glow"></div>
+  <svg id="seal" viewBox="0 0 150 150" aria-hidden="true">
+    <defs>
+      <radialGradient id="wax" cx="35%" cy="30%" r="80%">
+        <stop offset="0" stop-color="#b8333f"/><stop offset=".55" stop-color="#7d1522"/><stop offset="1" stop-color="#4a0b14"/>
+      </radialGradient>
+      <clipPath id="cl1"><polygon points="0,0 150,0 150,150 0,150" /></clipPath>
+    </defs>
+    <g class="half h1"><path id="sealPath1" fill="url(#wax)"/></g>
+    <circle cx="75" cy="75" r="46" fill="none" stroke="#e8c77a" stroke-opacity=".55" stroke-width="1.5"/>
+    <circle cx="75" cy="75" r="42" fill="rgba(0,0,0,.12)"/>
+    <text x="75" y="88" text-anchor="middle" font-family="Marck Script, cursive" font-size="44" fill="#f0d79a">S&amp;A</text>
+  </svg>
+  <div id="tapHint">Нажмите, чтобы открыть</div>
+</div>
+
+<!-- ============ ГЛАВНЫЙ ЭКРАН ============ -->
+<header id="hero">
+  <svg id="heroBg" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fbeed3"/><stop offset=".55" stop-color="#f3dfb9"/><stop offset="1" stop-color="#e9d3a8"/>
+      </linearGradient>
+      <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#cdc9a5"/><stop offset="1" stop-color="#a9ad8a"/>
+      </linearGradient>
+      <linearGradient id="stone" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#f1e1c3"/><stop offset="1" stop-color="#d7bd92"/>
+      </linearGradient>
+      <radialGradient id="sun" cx=".5" cy=".3" r=".7">
+        <stop offset="0" stop-color="#fff7de" stop-opacity=".95"/><stop offset="1" stop-color="#fff7de" stop-opacity="0"/>
+      </radialGradient>
+      <pattern id="lattice" width="26" height="26" patternUnits="userSpaceOnUse">
+        <path d="M13 0 L26 13 L13 26 L0 13Z" fill="none" stroke="#b98a3e" stroke-opacity=".28" stroke-width="1"/>
+        <circle cx="13" cy="13" r="2" fill="none" stroke="#b98a3e" stroke-opacity=".25"/>
+      </pattern>
+      <clipPath id="archClip">
+        <path d="M70 800 L70 330 C70 250 120 200 200 105 C280 200 330 250 330 330 L330 800Z"/>
+      </clipPath>
+      <filter id="blur2"><feGaussianBlur stdDeviation="1.6"/></filter>
+    </defs>
+    <!-- стена -->
+    <rect width="400" height="800" fill="url(#stone)"/>
+    <rect width="400" height="800" fill="url(#lattice)"/>
+    <!-- проём арки -->
+    <g clip-path="url(#archClip)">
+      <rect width="400" height="800" fill="url(#sky)"/>
+      <rect width="400" height="800" fill="url(#sun)"/>
+      <!-- далёкие деревья -->
+      <g fill="#b8b995" opacity=".75">
+        <ellipse cx="110" cy="545" rx="48" ry="40"/><ellipse cx="160" cy="552" rx="40" ry="30"/>
+        <ellipse cx="290" cy="548" rx="50" ry="38"/><ellipse cx="238" cy="556" rx="34" ry="26"/>
+        <rect x="196" y="480" width="8" height="70" fill="#c9c7a6"/><ellipse cx="200" cy="480" rx="12" ry="24" fill="#c9c7a6"/>
+      </g>
+      <!-- берег и озеро -->
+      <path d="M60 570 Q200 548 340 570 L340 800 L60 800Z" fill="url(#lake)"/>
+      <path d="M60 570 Q200 548 340 570 L340 585 Q200 566 60 585Z" fill="#b9bb94"/>
+      <g stroke="#fff" stroke-opacity=".35" stroke-width="1.5" fill="none">
+        <path d="M100 640 q20 -5 40 0 t40 0"/><path d="M220 700 q25 -6 50 0 t50 0"/><path d="M90 740 q20 -5 40 0 t40 0"/>
+      </g>
+    </g>
+    <!-- рамка арки -->
+    <path d="M70 800 L70 330 C70 250 120 200 200 105 C280 200 330 250 330 330 L330 800" fill="none" stroke="#b98a3e" stroke-width="5"/>
+    <path d="M58 800 L58 330 C58 240 112 186 200 80 C288 186 342 240 342 330 L342 800" fill="none" stroke="#c9a360" stroke-width="2" opacity=".8"/>
+    <path d="M82 800 L82 332 C82 258 128 212 200 125 C272 212 318 258 318 332 L318 800" fill="none" stroke="#b98a3e" stroke-width="1" opacity=".6"/>
+    <!-- колонны -->
+    <rect x="40" y="320" width="26" height="480" fill="#e5cfa6" stroke="#b98a3e" stroke-opacity=".6"/>
+    <rect x="334" y="320" width="26" height="480" fill="#e5cfa6" stroke="#b98a3e" stroke-opacity=".6"/>
+    <rect x="34" y="312" width="38" height="14" rx="3" fill="#d9bf8f"/><rect x="328" y="312" width="38" height="14" rx="3" fill="#d9bf8f"/>
+    <!-- лоза -->
+    <g id="vines" fill="none" stroke="#8a8f62" stroke-width="2" stroke-linecap="round"></g>
+    <!-- лебеди -->
+    <g id="swans" transform="translate(0,0)">
+      <g id="reflect" opacity=".28" filter="url(#blur2)" transform="translate(0,1330) scale(1,-1)"></g>
+      <g id="swanPair"></g>
+    </g>
+  </svg>
+
+  <!-- цветочные кусты -->
+  <svg id="flowersL" class="sway" style="position:absolute;left:-22px;bottom:-14px;width:190px;height:190px;z-index:2" viewBox="0 0 200 200"></svg>
+  <svg id="flowersR" class="sway b" style="position:absolute;right:-22px;bottom:-14px;width:190px;height:190px;z-index:2;transform:scaleX(-1)" viewBox="0 0 200 200"></svg>
+
+  <canvas id="particles"></canvas>
+
+  <div class="hero-text">
+    <div class="sub reveal-line">Свадебный день</div>
+    <div class="date reveal-line">06.12.2026</div>
+    <div class="names reveal-line">Сумая<span class="amp">&</span>Али</div>
+  </div>
+  <div id="scrollHint">ВНИЗ<i></i></div>
+</header>
+
+<button id="musicBtn" class="off" aria-label="Музыка"><span class="bars"><b></b><b></b><b></b><b></b></span></button>
+
+<!-- ============ ПРИГЛАШЕНИЕ ============ -->
+<section class="page">
+  <svg class="ornament fade" viewBox="0 0 120 16"><path d="M0 8 H44 M76 8 H120" stroke="#b98a3e" stroke-width="1"/><path d="M60 1 L67 8 L60 15 L53 8Z" fill="none" stroke="#b98a3e"/><circle cx="60" cy="8" r="2" fill="#b98a3e"/></svg>
+  <h2 class="fade">Дорогие гости!</h2>
+  <p class="lead fade">С огромной радостью приглашаем вас разделить с нами самый счастливый день нашей жизни — день, когда два любящих сердца становятся одной семьёй. Ваше присутствие украсит наш праздник и останется в наших сердцах навсегда.</p>
+  <p class="lead fade" style="margin-top:26px;font-style:italic;color:var(--wine)">С любовью, Сумая и Али</p>
+</section>
+
+<!-- ============ ДЕТАЛИ ============ -->
+<section class="page">
+  <h2 class="fade">Торжество</h2>
+  <div class="card fade">
+    <div class="detail"><small>Дата</small><strong>6 декабря 2026</strong></div>
+    <div class="detail"><small>Начало</small><strong>18:00</strong></div>
+    <div class="detail"><small>Место</small><strong id="venueName">Свадебный зал «Яккасарой»</strong></div>
+    <p id="venueAddr" style="margin-top:6px;font-size:18px;font-style:italic"></p>
+  </div>
+  <div class="map-wrap fade"><iframe id="mapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Карта"></iframe></div>
+  <a id="mapLink" class="btn fade" target="_blank" rel="noopener">Открыть на карте</a>
+</section>
+
+<!-- ============ ОТСЧЁТ ============ -->
+<section class="page">
+  <h2 class="fade">До праздника осталось</h2>
+  <div id="countdown" class="fade">
+    <div><b id="cd-d">0</b><span>дней</span></div>
+    <div><b id="cd-h">0</b><span>часов</span></div>
+    <div><b id="cd-m">0</b><span>минут</span></div>
+    <div><b id="cd-s">0</b><span>секунд</span></div>
+  </div>
+</section>
+
+<!-- ============ RSVP ============ -->
+<section class="page">
+  <h2 class="fade">Подтвердите присутствие</h2>
+  <p class="lead fade" style="margin-bottom:8px">Пожалуйста, сообщите нам о своём решении — нам важно подготовиться к встрече с вами.</p>
+  <div class="rsvp-btns fade">
+    <a id="yes" class="btn" target="_blank" rel="noopener">Приду с радостью</a>
+    <a id="no" class="btn ghost" target="_blank" rel="noopener">К сожалению, не смогу</a>
+  </div>
+</section>
+
+<footer>
+  <div class="sign fade">Сумая &amp; Али</div>
+  <p class="fade" style="margin-top:10px;font-style:italic">Ждём вас с нетерпением!</p>
+  <div class="brand">DOVUD DESIGN</div>
+</footer>
+
+<audio id="bgm" loop preload="none"></audio>
+
+<script>
+/* ================= НАСТРОЙКИ (меняйте здесь) ================= */
+const CONFIG = {
+  bride:'Сумая', groom:'Али',
+  weddingDate:'2026-12-06T18:00:00+05:00',   // время Таджикистана
+  venue:'Свадебный зал «Яккасарой»',
+  address:'',                                // впишите точный адрес, например: «г. Худжанд, ул. ...»
+  mapQuery:'Яккасарой туйхона',              // запрос для карты (лучше: «Яккасарой Худжанд» или точный адрес)
+  whatsapp:'992928343663',
+  musicFile:''                               // если есть свой файл, например 'music.mp3' — он заменит встроенную мелодию
+};
+
+/* ================= КАРТА И КОНТАКТЫ ================= */
+(function(){
+  const q = encodeURIComponent(CONFIG.address ? CONFIG.address+' '+CONFIG.venue : CONFIG.mapQuery);
+  document.getElementById('mapFrame').src = 'https://maps.google.com/maps?q='+q+'&hl=ru&z=15&output=embed';
+  document.getElementById('mapLink').href = 'https://www.google.com/maps/search/?api=1&query='+q;
+  document.getElementById('venueName').textContent = CONFIG.venue;
+  document.getElementById('venueAddr').textContent = CONFIG.address;
+  const msg = ans => encodeURIComponent('Здравствуйте! Приглашение на свадьбу '+CONFIG.bride+' и '+CONFIG.groom+' (06.12.2026): '+ans);
+  document.getElementById('yes').href = 'https://wa.me/'+CONFIG.whatsapp+'?text='+msg('Я с радостью приду. ✅');
+  document.getElementById('no').href  = 'https://wa.me/'+CONFIG.whatsapp+'?text='+msg('К сожалению, не смогу прийти.');
+})();
+
+/* ================= УЗОР КОНВЕРТА И ПЕЧАТЬ ================= */
+(function(){
+  // тиснёные цветочные веточки на створках
+  const sprig = (x,y,s,r)=>{
+    let g='<g transform="translate('+x+' '+y+') rotate('+r+') scale('+s+')" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width=".6">';
+    g+='<path d="M0 0 C2 -12 -2 -24 0 -38"/>';
+    for(let i=1;i<=5;i++){const yy=-i*7;
+      g+='<ellipse cx="4" cy="'+yy+'" rx="3.2" ry="1.4" transform="rotate(-35 4 '+yy+')"/><ellipse cx="-4" cy="'+(yy-3)+'" rx="3.2" ry="1.4" transform="rotate(35 -4 '+(yy-3)+')"/>';}
+    g+='<circle cx="0" cy="-40" r="3"/><circle cx="0" cy="-40" r="1.3"/></g>';
+    return g;
+  };
+  ['pat1','pat2','pat3','pat4'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.innerHTML = sprig(20,90,1.1,8)+sprig(50,95,.9,-6)+sprig(78,88,1,10)+sprig(35,55,.7,-12)+sprig(65,50,.7,14);
+  });
+  // зубчатый край печати
+  let d='';const N=22;
+  for(let i=0;i<=N*4;i++){
+    const a=i/(N*4)*Math.PI*2, r=62+Math.sin(a*N)*4+Math.sin(a*7)*2;
+    d+=(i?'L':'M')+(75+Math.cos(a)*r).toFixed(1)+' '+(75+Math.sin(a)*r).toFixed(1);
+  }
+  document.getElementById('sealPath1').setAttribute('d',d+'Z');
+})();
+
+/* ================= РИСУНОК: ЛОЗА, ЛЕБЕДИ, ЦВЕТЫ ================= */
+(function(){
+  const NS='http://www.w3.org/2000/svg';
+  // лоза по краям арки
+  const vines=document.getElementById('vines');
+  let v='';
+  const leaf=(x,y,r)=>'<ellipse cx="'+x+'" cy="'+y+'" rx="7" ry="3.2" transform="rotate('+r+' '+x+' '+y+')" fill="#9aa06f" stroke="none" opacity=".85"/>';
+  v+='<path d="M72 330 C60 280 92 240 120 210 C150 180 160 150 190 118"/>';
+  v+='<path d="M328 330 C340 280 308 240 280 210 C250 180 240 150 210 118"/>';
+  [[84,300,-40],[78,262,30],[100,232,-50],[128,204,20],[150,176,-30],[172,146,25],[188,122,-20]].forEach(a=>{v+=leaf(a[0],a[1],a[2]);v+=leaf(400-a[0],a[1],180-a[2]);});
+  [[96,252],[135,198],[168,152]].forEach(p=>{
+    v+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="4.5" fill="#fff" stroke="none" opacity=".92"/><circle cx="'+p[0]+'" cy="'+p[1]+'" r="1.6" fill="#e8c77a" stroke="none"/>';
+    v+='<circle cx="'+(400-p[0])+'" cy="'+p[1]+'" r="4.5" fill="#fff" stroke="none" opacity=".92"/><circle cx="'+(400-p[0])+'" cy="'+p[1]+'" r="1.6" fill="#e8c77a" stroke="none"/>';
+  });
+  vines.innerHTML=v;
+
+  // лебедь (смотрит вправо), нарисован вокруг (0,0)
+  const swan=
+   '<path d="M-52 0 C-44 20 -10 26 24 20 C46 16 56 2 50 -8 C34 -2 14 -6 -6 -10 C-28 -14 -46 -12 -52 0Z" fill="#fbfaf4" stroke="#d9d6c4" stroke-width="1.2"/>'+
+   '<path d="M-30 -2 C-18 -12 4 -12 18 -4" fill="none" stroke="#e6e3d2" stroke-width="2"/>'+
+   '<path d="M36 -6 C52 -14 58 -34 46 -50 C38 -62 20 -60 20 -48 C20 -40 30 -40 32 -48" fill="none" stroke="#fbfaf4" stroke-width="9" stroke-linecap="round"/>'+
+   '<path d="M36 -6 C52 -14 58 -34 46 -50 C38 -62 20 -60 20 -48 C20 -40 30 -40 32 -48" fill="none" stroke="#d9d6c4" stroke-width="1" stroke-linecap="round" opacity=".7"/>'+
+   '<path d="M32 -50 L24 -46 L33 -44Z" fill="#c9733d"/><circle cx="35" cy="-52" r="1.2" fill="#2a1a14"/>';
+  // правый лебедь - зеркально: делаем зеркало
+  const pair=document.getElementById('swanPair'), refl=document.getElementById('reflect');
+  const mk=()=>
+    '<g class="swan-l" transform="translate(150,640) scale(1.0)">'+swan+'</g>'+
+    '<g class="swan-r" transform="translate(250,640) scale(-1.0,1.0)">'+swan+'</g>';
+  pair.innerHTML=mk();
+  refl.innerHTML=mk();
+  // ряби
+  pair.insertAdjacentHTML('afterbegin','<g fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.3"><ellipse cx="150" cy="648" rx="64" ry="7"/><ellipse cx="250" cy="648" rx="64" ry="7"/><ellipse cx="200" cy="656" rx="110" ry="9" stroke-opacity=".3"/></g>');
+
+  // пионы
+  function peony(svg,cx,cy,R,hue){
+    const cols=hue==='p'?['#f6d3cd','#efb6b2','#e79c9c']:hue==='c'?['#fff4df','#f4dcb5','#e8c58f']:['#f9c7c0','#ee9fa0','#d97b86'];
+    let s='';
+    for(let ring=0;ring<3;ring++){
+      const n=7-ring, rr=R*(1-ring*.27);
+      for(let i=0;i<n;i++){
+        const a=i/n*360+ring*22;
+        s+='<ellipse cx="'+cx+'" cy="'+(cy-rr*.55)+'" rx="'+rr*.46+'" ry="'+rr*.62+'" fill="'+cols[ring]+'" stroke="#fff" stroke-opacity=".45" stroke-width=".7" transform="rotate('+a+' '+cx+' '+cy+')"/>';
+      }
+    }
+    s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R*.16+'" fill="#e8c77a"/>';
+    return s;
+  }
+  function bush(id){
+    const svg=document.getElementById(id);
+    let s='<g stroke="#8a8f62" stroke-width="2.2" fill="none" stroke-linecap="round"><path d="M10 200 C40 160 60 130 100 110"/><path d="M30 200 C60 170 110 150 150 140"/><path d="M0 170 C20 140 50 120 70 90"/></g>';
+    [[40,150,-30],[70,128,20],[110,140,-20],[60,170,40],[24,125,-40],[96,114,30],[130,152,10]].forEach(l=>{
+      s+='<ellipse cx="'+l[0]+'" cy="'+l[1]+'" rx="12" ry="5" fill="#9aa06f" opacity=".9" transform="rotate('+l[2]+' '+l[0]+' '+l[1]+')"/>';
+    });
+    s+=peony(svg,52,158,34,'c')+peony(svg,108,170,28,'p')+peony(svg,30,112,22,'r')+peony(svg,90,126,20,'c')+peony(svg,142,146,16,'p');
+    s+='<g fill="#fff" opacity=".9"><circle cx="70" cy="96" r="3.4"/><circle cx="122" cy="108" r="3"/><circle cx="16" cy="140" r="3"/><circle cx="150" cy="180" r="3"/></g>';
+    svg.innerHTML=s;
+  }
+  bush('flowersL');bush('flowersR');
+})();
+
+/* ================= ЧАСТИЦЫ ================= */
+(function(){
+  const c=document.getElementById('particles'),x=c.getContext('2d');
+  let W,H,P=[];
+  function size(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}
+  size();addEventListener('resize',size);
+  for(let i=0;i<38;i++)P.push({x:Math.random(),y:Math.random(),r:Math.random()*2+.6,s:Math.random()*.0004+.0001,p:Math.random()*6});
+  (function loop(t){
+    x.clearRect(0,0,W,H);
+    P.forEach(p=>{
+      p.y-=p.s*16;if(p.y<0)p.y=1;
+      const a=.35+.45*Math.sin(t/700+p.p);
+      x.beginPath();x.fillStyle='rgba(232,199,122,'+a+')';
+      x.arc(p.x*W+Math.sin(t/1500+p.p)*8,p.y*H,p.r,0,7);x.fill();
+    });
+    requestAnimationFrame(loop);
+  })(0);
+})();
+
+/* ================= ОБРАТНЫЙ ОТСЧЁТ ================= */
+(function(){
+  const target=new Date(CONFIG.weddingDate).getTime();
+  const $=id=>document.getElementById(id);
+  function tick(){
+    let d=Math.max(0,target-Date.now());
+    $('cd-d').textContent=Math.floor(d/864e5);
+    $('cd-h').textContent=String(Math.floor(d/36e5)%24).padStart(2,'0');
+    $('cd-m').textContent=String(Math.floor(d/6e4)%60).padStart(2,'0');
+    $('cd-s').textContent=String(Math.floor(d/1e3)%60).padStart(2,'0');
+  }
+  tick();setInterval(tick,1000);
+})();
+
+/* ================= ПОЯВЛЕНИЕ ПРИ ПРОКРУТКЕ ================= */
+(function(){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.2});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+})();
+
+/* ================= МУЗЫКА =================
+   Встроенная нежная мелодия (вальс, ре-мажор), создаётся в браузере.
+   Если в CONFIG.musicFile указан файл — играет он. */
+const Music=(function(){
+  let ctx,master,playing=false,timer,step=0,nextT=0,audioEl=document.getElementById('bgm');
+  const BPM=84, beat=60/BPM;
+  const f=n=>440*Math.pow(2,(n-69)/12);
+  // прогрессия: D  Bm  G  A  (по такту на аккорд, 3/4)
+  const chords=[[50,57,62,66],[47,54,59,62],[43,50,55,59],[45,52,57,61]];
+  const mel=[ // 4 такта по 3 доли, 0 = пауза
+    [78,0,74, 81,0,78, 79,0,76, 81,80,81],
+    [78,0,74, 76,0,78, 79,78,76, 74,0,0],
+    [81,0,78, 83,0,81, 79,0,76, 78,76,74],
+    [76,0,0, 78,76,74, 73,0,76, 74,0,0]
+  ];
+  function tone(freq,t,dur,type,vol,att){
+    const o=ctx.createOscillator(),g=ctx.createGain();
+    o.type=type;o.frequency.value=freq;
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+(att||.02));
+    g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.05);
+  }
+  function schedule(){
+    while(nextT<ctx.currentTime+.4){
+      const bar=Math.floor(step/3)%16, beatIn=step%3;
+      const ch=chords[bar%4], section=Math.floor(bar/4)%4;
+      // бас на первую долю, арпеджио на 2 и 3
+      if(beatIn===0){tone(f(ch[0]-12),nextT,beat*2.6,'sine',.20,.03);tone(f(ch[0]),nextT,beat*2.4,'triangle',.08,.03);}
+      else tone(f(ch[beatIn]+12),nextT,beat*1.3,'triangle',.07,.01);
+      // мягкий пэд
+      if(beatIn===0&&bar%2===0) ch.slice(1).forEach(n=>tone(f(n),nextT,beat*5.8,'sine',.035,.5));
+      // мелодия (вторую и четвёртую секции играем выше/ярче)
+      const m=mel[bar%4][ (bar%4>=0? (step%12):0) ];
+      const mm=mel[bar%4][step%12];
+      if(mm&&section>=1){ // с 5-го такта — мелодия
+        const sh=section===3?12:0;
+        tone(f(mm+sh-12),nextT,beat*1.6,'sine',.11,.02);
+        tone(f(mm+sh),nextT,beat*1.2,'triangle',.035,.02);
+      }
+      nextT+=beat;step++;
+    }
+  }
+  function start(){
+    if(CONFIG.musicFile){
+      if(!audioEl.src||audioEl.src.indexOf(CONFIG.musicFile)<0)audioEl.src=CONFIG.musicFile;
+      audioEl.volume=.7;audioEl.play().catch(()=>{});playing=true;return;
+    }
+    if(!ctx){
+      ctx=new(window.AudioContext||window.webkitAudioContext)();
+      master=ctx.createGain();master.gain.value=0;
+      // лёгкое эхо для «воздуха»
+      const dl=ctx.createDelay(1),fb=ctx.createGain(),wet=ctx.createGain();
+      dl.delayTime.value=beat*.75;fb.gain.value=.38;wet.gain.value=.45;
+      master.connect(ctx.destination);master.connect(dl);dl.connect(fb);fb.connect(dl);dl.connect(wet);wet.connect(ctx.destination);
+    }
+    ctx.resume();
+    master.gain.cancelScheduledValues(ctx.currentTime);
+    master.gain.linearRampToValueAtTime(.9,ctx.currentTime+1.5);
+    if(!playing){nextT=ctx.currentTime+.15;timer=setInterval(schedule,120);}
+    playing=true;
+  }
+  function stop(){
+    if(CONFIG.musicFile){audioEl.pause();playing=false;return;}
+    if(ctx){master.gain.cancelScheduledValues(ctx.currentTime);master.gain.linearRampToValueAtTime(0,ctx.currentTime+.6);
+      clearInterval(timer);setTimeout(()=>{if(!playing&&ctx)ctx.suspend()},700);}
+    playing=false;
+  }
+  return{start,stop,get on(){return playing}};
+})();
+
+const btn=document.getElementById('musicBtn');
+btn.addEventListener('click',()=>{
+  if(Music.on){Music.stop();btn.classList.add('off')}
+  else{Music.start();btn.classList.remove('off')}
+});
+
+/* ================= ОТКРЫТИЕ КОНВЕРТА ================= */
+(function(){
+  const env=document.getElementById('envelope');
+  let done=false;
+  env.addEventListener('click',()=>{
+    if(done)return;done=true;
+    env.classList.add('open');
+    Music.start();btn.classList.remove('off');
+    setTimeout(()=>{document.body.classList.add('opened')},900);
+    setTimeout(()=>{document.body.classList.remove('locked');env.style.display='none'},1800);
+    // лепестки
+    for(let i=0;i<22;i++){
+      const p=document.createElement('div');p.className='petal';
+      p.style.left=Math.random()*100+'vw';
+      p.style.setProperty('--dx',(Math.random()*160-80)+'px');
+      p.style.animationDuration=(5+Math.random()*5)+'s';
+      p.style.animationDelay=(1+Math.random()*3)+'s';
+      p.style.transform='scale('+(.6+Math.random()*.8)+')';
+      document.body.appendChild(p);setTimeout(()=>p.remove(),14000);
+    }
+  });
+})();
+</script>
+</body>
+</html>
